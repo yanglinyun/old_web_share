@@ -143,7 +143,7 @@
 
     function shareTo(types){
  
-            var title,imageUrl,url,description,keywords;
+            var title=" ",imageUrl=" ",url=" ",description=" ";
 
             //获取文章标题
             title = document.getElementById("title").value;
@@ -190,7 +190,8 @@
 
             //qq空间接口的传参
             if(types=='qqzone'){
-                var shareqqzonestring = 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&title='+title+'&pics=&summary=&desc='+description;
+                
+                var shareqqzonestring = 'https://h5.qzone.qq.com/q/qzs/open/connect/widget/mobile/qzshare/index.html?page=qzshare.html&loginpage=loginindex.html&logintype=qzone&title='+title+'&summary='+summary+'&url='+url+'&desc='+description+'&imageUrl=&site=&sid=&referer='
                 window.open(shareqqzonestring, 'newwindow', 'height=300,width=300,top=100,left=100');
             }
             //新浪微博接口的传参
