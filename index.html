@@ -190,7 +190,8 @@
 
             //qq空间接口的传参
             if(types=='qqzone'){
-                window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&sharesource=qzone&title='+title+'&pics='+imageUrl+'&summary='+description);
+                var shareqqzonestring = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' + title + '&url=' + url + '&pics=' + imageUrl;
+                window.open(shareqqzonestring, 'newwindow', 'height=300,width=300,top=100,left=100');
             }
             //新浪微博接口的传参
             if(types=='sina'){
