@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Document</title>
+    <style>
+        body{
+            width: 960px;
+            margin: 0 auto;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+            background-color: snow;
+            text-align: center;
+        }
+        nav{
+            height: 3em;
+            background-color: skyblue;
+            line-height: 3em;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        #title,#url{
+            margin: 0 auto;
+            margin-top: 3em;
+            width: 60%;
+            height: 3em;
+            border: 5px solid skyblue;
+            border-radius: 20px;
+            padding-left: 20px;
+            outline:none;
+        }
+        #title:focus,#url:focus{
+            box-shadow: 0 0 10px 2px skyblue;
+        }
+        button{
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            height: 5em;
+            margin-top: 5em;
+            width: 5em;
+            border-radius: 50%;
+            background-color: skyblue;
+        }
+        button :nth-child(1)
+        {
+            position: absolute;
+            width: 2em;
+            height: 1em;
+            background-color: white;
+            left: 1em;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        button :nth-child(2)
+        {
+            transform: rotateZ(0);
+            position: absolute;
+            border-top: 1.2em solid transparent;
+            border-bottom: 1.2em solid transparent;
+            border-left: 1.2em solid white;
+            border-right: 1.2em solid transparent;
+            left: 2.98em;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .web{
+            font-size: .8em;
+            width: 65%;
+            margin: 0 auto;
+            margin-top: 3em;
+            border:5px solid skyblue;
+            border-radius: 10px;
+            box-shadow: 0 10px skyblue;
+            text-align: left;
+            padding-left: 5px;
+        }
+        .web ul{
+            display: flex;
+            padding:0;
+            flex-wrap: wrap;
+            
+        }
+        li{
+            list-style: none;
+            
+            flex: 10%;
+        }
+        @media screen and (max-width: 640px){
+            body{
+                width: 100%;
+            }
+            li{
+            list-style: none;
+            
+            flex: 50%;
+        }
+        }
+    </style>
+</head>
+<body>
+    <nav>老旧网页分享</nav>
+    <input type="text" value="请输入网址" onfocus="if(value=='请输入网址')value=''" onblur="if(!value)value='请输入网址'" id="url"> 
+    <input type="text" value="请输入标题" onfocus="if(value=='请输入标题')value=''" onblur="if(!value)value='请输入标题'" id="title"> 
+    <div class="web">
+        分享至:<br>
+        <ul>
+            <li><input type="radio" name="platform" value="wx" class="radio">微信</li>
+            <li><input type="radio" name="platform" value="qqzone" class="radio" checked="checked">qq空间</li>
+            <li><input type="radio" name="platform" value="sina" class="radio">sina微博</li>
+            <li><input type="radio" name="platform" value="qqfriend" class="radio">qq好友</li>
+        </ul>
+    </div>
+    <button>
+        <div></div>
+        <div></div>
+    </button>
+    <!-- <iframe style="display: none;"></iframe> -->
+</body>
+<script>
+    var iframe;
+    var btn = document.getElementsByTagName('button')[0];
+    var urlInput = document.getElementsByTagName('input')[0];
+    
+    btn.addEventListener("click",function()
+    {
+        console.log("ok");
+        var type = "";
+        var allRadio = document.getElementsByClassName('radio');
+        for(var i=0 ; i<allRadio.length;i++)
+        {
+            if(allRadio[i].checked)
+            {
+                type = allRadio[i].value;
+                break;
+            }
+        }
+        shareTo(type);
+    })
+
+    function shareTo(types){
+ 
+            var title,imageUrl,url,description,keywords;
+
+            //获取文章标题
+            title = document.getElementById("title").value;
+            description ="";
+
+            //获取网页中内容的第一张图片地址作为分享图
+            //imageUrl = document.images[0].src;
+            //imageUrl = document.getElementById("pcdetails").getElementsByTagName("img")[0];
+            //当内容中没有图片时，设置分享图片为网站logo
+            // if(typeof imageUrl == 'undefined'){
+            //     imageUrl = 'https://'+window.location.host+'/static/images/logo.png';
+            // } else {
+            //     imageUrl = imageUrl.src;
+            // }
+
+            //获取当前网页url
+            url = urlInput.value;
+            // var iframe = document.getElementsByTagName('iframe')[0];
+            // iframe.location=url;
+            
+            
+            // iframe = document.createElement("iframe");  
+            // iframe.src = "http://www.baidu.com";  
+            //document.domain = iframe.src;
+            // if (!/*@cc_on!@*/0) { //如果不是IE，IE的条件注释  
+            //     iframe.onload = function(){     
+            //         alert("Local iframe is now loaded.");  
+            //     };  
+            // } else {  
+            //     iframe.onreadystatechange = function(){ // IE下的节点都有onreadystatechange这个事件  
+            //         if (iframe.readyState == "complete"){  
+            //             alert("Local iframe is now loaded.");  
+            //         }  
+            //     };  
+            // }  
+            // document.body.appendChild(iframe);  
+            // description = iframe.querySelector('meta[name="description"]').getAttribute('content');
+            // console.log(description);
+            //获取网页描述
+            //description = document.querySelector('meta[name="description"]').getAttribute('content');
+
+            //获取网页关键字
+            //keywords = document.querySelector('meta[name="keywords"]').getAttribute('content');
+
+            //qq空间接口的传参
+            if(types=='qqzone'){
+                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&sharesource=qzone&title='+title+'&pics='+imageUrl+'&summary='+description);
+            }
+            //新浪微博接口的传参
+            if(types=='sina'){
+                window.open('http://service.weibo.com/share/share.php?url='+url+'&sharesource=weibo&title='+title+'&pic='+imageUrl+'&appkey=2706825840');
+            }
+            //qq好友接口的传参
+            if(types == 'qqfriend'){
+                window.open('http://connect.qq.com/widget/shareqq/index.html?url='+url+'&sharesource=qzone&title='+title+'&pics='+imageUrl+'&summary='+description+'&desc='+keywords);
+            }
+            //生成二维码给微信扫描分享
+            if(types == 'wx'){
+                //在线二维码（服务器性能限制，仅测试使用，屏蔽非大陆ip访问）
+                window.open('https://zixuephp.net/inc/qrcode_img.php?url='+url);
+            }
+
+    }
+</script>
+</html>
